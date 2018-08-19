@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import com.sun.org.apache.regexp.internal.recompile;
+
 public class PostDAO {
 	private Connection conn;
 	private PreparedStatement pstmt;
@@ -70,20 +72,20 @@ public class PostDAO {
 		int totalPosts = 0;
 		int maxPage = 0;
 		
-		String SQL = "SELECT count(*) count FROM post WHERE division = ?;";
+		String SQL = null;
 		
 		if(select.equals("1")) {
-			SQL = "SELECT count(*) count FROM post WHERE division = ? and area LIKE '%?%';";
+			SQL = "SELECT count(*) count FROM post WHERE division = ? and area LIKE ?;";
 		} else if(select.equals("2")) {
-			SQL = "SELECT count(*) count FROM post WHERE division = ? and title LIKE '%?%';";
+			SQL = "SELECT count(*) count FROM post WHERE division = ? and title LIKE ?;";
 		} else if(select.equals("3")) {
-			SQL = "SELECT count(*) count FROM post WHERE division = ? and content LIKE '%?%';";
+			SQL = "SELECT count(*) count FROM post WHERE division = ? and content LIKE ?;";
 		}
 		
 		try {
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, division);
-			pstmt.setString(2, text);
+			pstmt.setString(2, "%" + text + "%");
 			
 			rs = pstmt.executeQuery();
 			rs.next();
@@ -128,20 +130,20 @@ public class PostDAO {
 	public ArrayList<Posts> searchGetPosts(int currentPage, String division, String select, String text) {
 		ArrayList<Posts> posts = new ArrayList<>();
 		
-		String SQL = "SELECT * FROM post WHERE division = ? ORDER BY timestamp DESC LIMIT 10 OFFSET " + ((currentPage - 1) * 10);
+		String SQL = null;
 		
 		if(select.equals("1")) {
-			SQL = "SELECT * FROM post WHERE division = ? and area LIKE '%?%' ORDER BY timestamp DESC LIMIT 10 OFFSET " + ((currentPage - 1) * 10);
+			SQL = "SELECT * FROM post WHERE division = ? and area LIKE ? ORDER BY timestamp DESC LIMIT 10 OFFSET " + ((currentPage - 1) * 10);
 		} else if(select.equals("2")) {
-			SQL = "SELECT * FROM post WHERE division = ? and title LIKE '%?%' ORDER BY timestamp DESC LIMIT 10 OFFSET " + ((currentPage - 1) * 10);
+			SQL = "SELECT * FROM post WHERE division = ? and title LIKE ? ORDER BY timestamp DESC LIMIT 10 OFFSET " + ((currentPage - 1) * 10);
 		} else if(select.equals("3")) {
-			SQL = "SELECT * FROM post WHERE division = ? and content LIKE '%?%' ORDER BY timestamp DESC LIMIT 10 OFFSET " + ((currentPage - 1) * 10);
+			SQL = "SELECT * FROM post WHERE division = ? and content LIKE ? ORDER BY timestamp DESC LIMIT 10 OFFSET " + ((currentPage - 1) * 10);
 		}
 		
 		try {
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, division);
-			pstmt.setString(2, text);
+			pstmt.setString(2, "%" + text + "%");
     		
     		rs = pstmt.executeQuery();
     		
@@ -187,5 +189,51 @@ public class PostDAO {
 		}
 		
 		return null;
+	}
+	
+	public String getTime(int id) {
+		String SQL = "SELECT timestamp FROM post WHERE id = ?";
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setInt(1, id);
+			
+			rs = pstmt.executeQuery();
+			rs.next();
+
+			String timestamp = rs.getString("timestamp");
+			
+			String text = "";
+			text += timestamp.substring(2, 4);
+			text += ".";
+			text += timestamp.substring(5, 7);
+			text += ".";
+			text += timestamp.substring(8, 10);
+			text += " ";
+			text += timestamp.substring(11, 13);
+			text += ":";
+			text += timestamp.substring(14, 16);
+			
+			return text;
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	public int deletePost(int id) {
+		String SQL = "DELETE FROM post WHERE id = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			
+			pstmt.setInt(1, id);
+			
+			return pstmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return -1; // ¿À·ù
 	}
 }

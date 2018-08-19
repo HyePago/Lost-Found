@@ -117,4 +117,25 @@ public class UserDAO {
 		
 		return null; // 데이터베이스 오류
 	}
+	
+	public String getPhone(String nickname) {
+		String SQL = "SELECT phone FROM user WHERE nickname = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(SQL);
+			
+			pstmt.setString(1, nickname);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				return rs.getString(1); // 닉네임 존재
+			} else {
+				return null; // 닉네임 존재 X
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null; // 데이터베이스 오류
+	}
 }

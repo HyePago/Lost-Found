@@ -18,5 +18,9 @@
 	<section width="1200px" id="mainSection">
 		<jsp:include page="<%= ContentPage %>" flush="false" />
 	</section>
+	
+	<footer>
+		3209 ฑ่วýม๘
+	</footer>
 </body>
 </html>

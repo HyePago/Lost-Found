@@ -10,13 +10,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<% 
-		request.setCharacterEncoding("EUC-KR"); 
+	<%
+		request.setCharacterEncoding("EUC-KR");
 		
+		String select = request.getParameter("select");
+		String searchText = request.getParameter("searchText");
 		PostDAO postDAO = new PostDAO();
-	
-		int request_division = Integer.parseInt(request.getParameter("division"));
 		
+		int request_division = Integer.parseInt(request.getParameter("division"));
 	%>
 	<form action="test.jsp" method="post">
 		<table class="postFormTable" width="780px" style="text-align: center;">
@@ -93,7 +94,7 @@
 		
 		// page
 		int requestPage = Integer.parseInt(request.getParameter("page"));
-		int maxPage = postDAO.maxPage(division);
+		int maxPage = postDAO.searchMaxPage(division, select, searchText);
 		int currentPage = requestPage;
 		
 		if(requestPage < 1) {
@@ -103,7 +104,7 @@
 		}
 		
 		// post
-		ArrayList<Posts> posts = postDAO.getPosts(currentPage, division);
+		ArrayList<Posts> posts = postDAO.searchGetPosts(currentPage, division, select, searchText);
 	%>
 	<table class="postFormTable" width="780px">
 		<tr>

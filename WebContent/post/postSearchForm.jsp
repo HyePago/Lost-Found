@@ -1,3 +1,4 @@
+<%@page import="java.net.URLEncoder"%>
 <%@page import="post.Posts"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="post.PostDAO"%>
@@ -6,36 +7,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
 <title>Insert title here</title>
 </head>
 <body>
 	<% 
-		request.setCharacterEncoding("EUC-KR"); 
+		request.setCharacterEncoding("EUC-KR");
+	
+		// request
+		String select = request.getParameter("select");
+		String searchText = request.getParameter("searchText");
+		
+		out.println(select);
+		out.println(searchText);
 		
 		PostDAO postDAO = new PostDAO();
 	
 		int request_division = Integer.parseInt(request.getParameter("division"));
-		
-	%>
-	<form action="test.jsp" method="post">
-		<table class="postFormTable" width="780px" style="text-align: center;">
-			<tr>
-				<td>
-					<select name="select">
-						<option value="1">지역</option>
-						<option value="2">제목</option>
-						<option value="3">내용</option>
-					</select>
-					<input type="text" name="searchText" />
-					<input type="submit" value="검색">
-				</td>
-			</tr>
-		</table>
-		<input type="hidden" name="division" value="<%= request_division %>" />
-		<input type="hidden" name="page" value="1" />
-	</form>	
-	<%
 		
 		// division: String 변환
 		String division = null;
@@ -45,7 +32,7 @@
 			division = "서울";
 			break;
 		case 2:
-			division = "경기도";
+			division = "경기";
 			break;
 		case 3:
 			division = "인천";
@@ -93,7 +80,7 @@
 		
 		// page
 		int requestPage = Integer.parseInt(request.getParameter("page"));
-		int maxPage = postDAO.maxPage(division);
+		int maxPage = postDAO.searchMaxPage(division, select, searchText);
 		int currentPage = requestPage;
 		
 		if(requestPage < 1) {
@@ -103,8 +90,25 @@
 		}
 		
 		// post
-		ArrayList<Posts> posts = postDAO.getPosts(currentPage, division);
+		ArrayList<Posts> posts = postDAO.searchGetPosts(currentPage, division, select, searchText);
 	%>
+	<form action="postSearch.jsp" method="post">
+		<table class="postFormTable" width="780px" style="text-align: center;">
+			<tr>
+				<td>
+					<select name="select">
+						<option value="1">위치</option>
+						<option value="2">제목</option>
+						<option value="3">내용</option>
+					</select>
+					<input type="text" name="searchText" required>
+					<input type="hidden" name="division" value="<%= request_division %>">
+					<input type="hidden" name="page" value="1">
+					<input type="submit" name="submit" id="submit"></input><label for="submit"><img src="images/magnifier.png" style="width: 25px; height: 25px; margin-bottom: -6px;"></label>	
+				</td>
+			</tr>
+		</table>
+	</form>
 	<table class="postFormTable" width="780px">
 		<tr>
 			<td class="tableLogo" colspan="3"><%= division %><hr color="#2478FF" height="2px"></td>
@@ -121,7 +125,7 @@
 				<tr>
 					<td><%= post.getTime() %></td>
 					<td><%= post.getArea() %></td>
-					<td><a href="postView.jsp?id=<%= post.getId() %>&time=<%= post.getTime() %>" class="postTitle"><%= post.getTitle() %></a></td>
+					<td><a href="../postView.jsp?id=<%= post.getId() %>" class="postTitle"><%= post.getTitle() %></a></td>
 				</tr>
 				<tr>
 					<td colspan="3"><hr color="#2478FF" size=1></td>
