@@ -27,7 +27,7 @@
 	if(fileName == null) {
 		post.setPicture("");
 	} else {
-		post.setPicture(savePath + "/" + fileName);
+		post.setPicture("img/" + fileName);
 	}
 	
 	if(multi.getParameter("phone") == null) {
