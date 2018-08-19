@@ -1,0 +1,280 @@
+@charset "EUC-KR";
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding');
+@import url('https://fonts.googleapis.com/css?family=Lobster');
+
+*{
+	font-family: 'Nanum Gothic Coding', monospace;
+}
+body {
+	margin: 0;
+	padding: 0;
+}
+input:focus {
+  outline: none;
+}
+select:focus {
+  outline: none;
+}
+textarea:focus {
+  outline: none;
+}
+a {
+	text-decoration: none;
+	color: black;
+}
+
+/* top */
+.topBody {
+	background-color: #2478FF;
+}
+.mainHeader {
+	width: 100%;
+	top: 0;
+	background-color: #2478FF;
+}
+.logo {
+	text-align: center;
+	float: left;
+	margin: auto;
+	width: 200px;
+	text-align: center;
+	margin-left: 43%;
+	padding-top: 0.7%;
+	color: #2478FF;
+	font-family: 'Lobster', cursive;
+	font-size: 1.4em;
+}
+.topUl {
+	list-style: none;
+	float: right;
+	margin-right: 10%;
+}
+.topUl li {
+	display: inline;
+	padding-left: 30px;
+}
+
+/* main */
+#mainSection {
+	clear: both;
+	width: 1100px;
+	margin: auto;
+	border: 1px solid gray;
+	padding-top: 10px;
+	text-align: center;
+}
+.mainSelectDiv {
+	display: inline-block;
+	width: 230px;
+	height: 31px;
+	border: 1px solid black;
+	margin: 0 auto;
+	margin: 10px 10px;
+	text-align: center;
+	padding-top: 99px;
+	font-weight: bold;
+	border: 1px solid gray;
+}
+.mainSelectFont {
+	background: rgba(0, 0, 0, 0.5);
+	color: white;
+	text-align: left;
+	padding-left: 10px;
+	height: 23px;
+	padding-top: 5px;
+	padding-bottom: 3px;
+}
+.mainSelectInnerDiv {
+	width: 100%;
+	height: 100%;
+}
+.mainSelectDiv:hover {
+	background-color:rgba(0,0,0,0.5);
+	background-blend-mode: overlay;
+}
+.Seoul {
+	background-image: url('../images/Seoul.jpg');
+	background-size: contain;
+}
+.Gyeonggi {
+	background-image: url('../images/Gyeonggi.PNG');
+	background-size: contain;
+}
+.Incheon {
+	background-image: url('../images/Incheon.jpg');
+	background-size: contain;
+}
+.Gangwon {
+	background-image: url('../images/Gangwon.jpg');
+	background-size: contain;
+}
+.ChungCheongBukdo {
+	background-image: url('../images/ChungCheongBukdo.jpg');
+	background-size: contain;
+}
+.ChungCheongNamdo {
+	background-image: url('../images/ChungCheongNamdo.jpg');
+	background-size: contain;
+}
+.Daejeon {
+	background-image: url('../images/Daejeon.jpg');
+	background-size: contain;
+}
+.Gyeongsangbuk {
+	background-image: url('../images/Gyeongsangbuk.jpg');
+	background-size: contain;
+}
+.Gyeongsangnam {
+	background-image: url('../images/Gyeongsangnam.jpg');
+	background-size: contain;
+}
+.Daegu {
+	background-image: url('../images/Daegu.jpg');
+	background-size: contain;
+}
+.Ulsan {
+	background-image: url('../images/Ulsan.jpg');
+	background-size: contain;
+}
+.Busan {
+	background-image: url('../images/Busan.jpg');
+	background-size: contain;
+}
+.Jeollabukdo {
+	background-image: url('../images/Jeollabukdo.jpeg');
+	background-size: contain;
+}
+.Jeollanamdo {
+	background-image: url('../images/Jeollanamdo.jpeg');
+	background-size: contain;
+}
+.Gwangju {
+	background-image: url('../images/Gwangju.jpg');
+	background-size: contain;
+}
+.Jeju {
+	background-image: url('../images/Jeju.jpg');
+	background-size: contain;
+}
+.searchText {
+	width: 400px;
+	height: 30px;
+	border: 0px solid black;
+	border-bottom: 2px solid gray;
+	font-size: 1em;
+}
+
+/* join */
+.joinFormTable {
+	margin: auto;
+	text-align: left;
+}
+.joinFormTable input[type=text], input[type=password] {
+	width: 300px;
+	height: 20px;
+	border: 0px solid black;
+	border-bottom: 2px solid #2478FF;
+	margin: 10px 0px;
+	padding: 3px;
+}
+.joinFormTable select {
+	border: 0px solid black;
+	border-bottom: 2px solid #2478FF;
+	width: 45px;
+	height: 30px;
+}
+.joinFormTable input[type=submit] {
+	width: 130px;
+	height: 40px;
+	border: 2px solid #2478FF;
+	background-color: white;
+	margin: 10px 0px 20px 0px;
+	font-weight: bold;
+}
+.joinFormTable input[type=submit]:hover {
+	background-color: #2478FF;
+	color: white;
+}
+.tel {
+	width: 100px;
+	height: 20px;
+	border: 0px solid black;
+	border-bottom: 2px solid #2478FF;
+}
+
+/* write */
+.writeFormTable {
+	margin: auto;
+	text-align: left;
+}
+.writeFormTable input[type=text], input[type=password] {
+	width: 300px;
+	height: 20px;
+	border: 0px solid black;
+	border-bottom: 2px solid #2478FF;
+	margin: 10px 0px;
+	padding: 3px;
+}
+.writeFormTable select {
+	border: 0px solid black;
+	border-bottom: 2px solid #2478FF;
+	width: 100px;
+	height: 30px;
+}
+.writeFormTable input[type=submit] {
+	width: 130px;
+	height: 40px;
+	border: 2px solid #2478FF;
+	background-color: white;
+	margin: 10px 0px 20px 0px;
+	font-weight: bold;
+}
+.writeFormTable textarea {
+	resize: none;
+	width:300px;
+	height: 100px;
+	border: 2px solid #2478FF;
+	padding: 7px;
+	margin: 5px 0px;
+}
+.writeFormTable input[type=submit]:hover {
+	background-color: #2478FF;
+	color: white;
+}
+input[id="phone"] + label {
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	border: 2px solid #2478FF;
+	cursor: pointer;
+	font-family: monospace;
+	margin: 5px 0px;
+}
+input[id="phone"]:checked + label:after {
+  content: '\2714';
+  font-size: 1em;
+  padding-top: -50px;
+  margin-top: -50px;
+}
+input[id="phone"] {
+  display: none;
+}
+.writeFormTable input[type=file] + label {
+	font-family: 'Nanum Gothic Coding', monospace;
+	display: inline-block;
+	width: 100px;
+	height: 19px;
+	border: 2px solid #2478FF;
+	cursor: pointer;
+	text-align: center;
+	font-size: 0.9em;
+	padding: 2px;
+	margin: 5px 0px;
+}
+input[type=file] {
+  display: none;
+}
+.pictureLabel:hover { 
+	background-color: #2478FF;
+	color: white;
+}
